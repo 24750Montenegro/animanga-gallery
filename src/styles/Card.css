@@ -18,6 +18,10 @@
   aspect-ratio: 2 / 3;
   background: var(--c-surface-2);
   overflow: hidden;
+  display: grid;
+  place-items: center;
+  color: var(--c-text-dim);
+  font-size: 0.9rem;
 }
 .card-image img {
   width: 100%;

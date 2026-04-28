@@ -19,6 +19,20 @@
   flex-direction: column;
   gap: 4px;
 }
+
+.filter-actions-field {
+  justify-content: flex-end;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-spacer {
+  min-height: 18px;
+}
+
 .filter-field label {
   font-size: 0.75rem;
   text-transform: uppercase;
