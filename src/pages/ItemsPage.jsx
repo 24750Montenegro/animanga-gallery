@@ -11,6 +11,10 @@ import { useFetch } from '../hooks/useFetch.js';
 
 const LIMIT = 24;
 
+function hasFilterChanges(current, applied) {
+  return Object.keys(current).some((key) => current[key] !== applied[key]);
+}
+
 export default function ItemsPage() {
   const [filters, setFilters] = useState(initialFilters);
   const [activeFilters, setActiveFilters] = useState(initialFilters);
@@ -40,6 +44,7 @@ export default function ItemsPage() {
   );
 
   const pagination = data?.pagination;
+  const hasPendingFilters = hasFilterChanges(filters, activeFilters);
 
   const handleChange = (field, value) => {
     setFilters((current) => ({
@@ -75,6 +80,7 @@ export default function ItemsPage() {
         onChange={handleChange}
         onSubmit={handleSubmit}
         onReset={handleReset}
+        hasPendingChanges={hasPendingFilters}
       />
 
       {loading && visibleItems.length === 0 && <Loader />}

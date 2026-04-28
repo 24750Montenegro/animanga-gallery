@@ -29,6 +29,19 @@
   gap: 8px;
 }
 
+.apply-button.pending {
+  background: #f6c453;
+  border-color: #f6c453;
+  color: #101010;
+  box-shadow: 0 0 0 3px rgba(246, 196, 83, 0.16);
+}
+
+.apply-button.pending:hover {
+  background: #ffe08a;
+  border-color: #ffe08a;
+  color: #101010;
+}
+
 .filter-spacer {
   min-height: 18px;
 }

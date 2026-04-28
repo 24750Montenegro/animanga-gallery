@@ -2,7 +2,14 @@ import PropTypes from 'prop-types';
 import { itemTypeOptions, scoreOptions, sortOptions } from '../data/filterOptions.js';
 import '../styles/Filters.css';
 
-export default function Filters({ values, genres = [], onChange, onSubmit, onReset }) {
+export default function Filters({
+  values,
+  genres = [],
+  onChange,
+  onSubmit,
+  onReset,
+  hasPendingChanges = false,
+}) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (onSubmit) onSubmit();
@@ -77,7 +84,12 @@ export default function Filters({ values, genres = [], onChange, onSubmit, onRes
       <div className="filter-field filter-actions-field">
         <span className="filter-spacer" aria-hidden="true" />
         <div className="filter-actions">
-          <button type="submit" className="btn-primary">Aplicar</button>
+          <button
+            type="submit"
+            className={hasPendingChanges ? 'btn-primary apply-button pending' : 'btn-primary apply-button'}
+          >
+            Aplicar
+          </button>
           <button type="button" onClick={onReset}>Limpiar</button>
         </div>
       </div>
@@ -102,4 +114,5 @@ Filters.propTypes = {
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func,
   onReset: PropTypes.func,
+  hasPendingChanges: PropTypes.bool,
 };
