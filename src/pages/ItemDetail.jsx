@@ -1,4 +1,5 @@
 import { Link, useParams, useSearchParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Loader from '../components/Loader.jsx';
 import { getAnimeById } from '../api/animeService.js';
 import { getMangaById } from '../api/mangaService.js';
@@ -6,6 +7,28 @@ import { normalizeDetail } from '../data/itemMappers.js';
 import { useApp } from '../hooks/useApp.js';
 import { useFetch } from '../hooks/useFetch.js';
 import '../styles/Detail.css';
+
+function BackIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M19 12H5" />
+      <path d="m12 19-7-7 7-7" />
+    </svg>
+  );
+}
+
+function BackToGalleryLink({ className = 'detail-back-link' }) {
+  return (
+    <Link to="/items" className={className}>
+      <BackIcon />
+      <span>Volver a la galeria</span>
+    </Link>
+  );
+}
+
+BackToGalleryLink.propTypes = {
+  className: PropTypes.string,
+};
 
 export default function ItemDetail() {
   const { id } = useParams();
@@ -27,7 +50,7 @@ export default function ItemDetail() {
     return (
       <main className="container">
         <p className="error-box">No se pudo cargar el detalle solicitado.</p>
-        <Link to="/items" className="btn-link">Volver a la galeria</Link>
+        <BackToGalleryLink className="btn-link detail-back-button" />
       </main>
     );
   }
@@ -37,7 +60,7 @@ export default function ItemDetail() {
 
   return (
     <main className="container">
-      <Link to="/items" className="text-link">Volver a la galeria</Link>
+      <BackToGalleryLink />
       <article className="detail">
         <div className="detail-cover">
           {item.image ? <img src={item.image} alt={item.title} /> : <span>Sin imagen</span>}
