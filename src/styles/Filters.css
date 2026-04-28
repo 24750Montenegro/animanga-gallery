@@ -1,6 +1,6 @@
 .filters {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto;
   gap: 12px;
   background: var(--c-surface);
   border: 1px solid var(--c-border);

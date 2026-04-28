@@ -1,15 +1,29 @@
 import { jikanFetch } from './jikan.js';
 
-// Buscar mangas con filtros
-export function searchManga({ q = '', genre = '', minScore = '', page = 1, limit = 24 } = {}) {
+const orderConfig = {
+  recent: { orderBy: 'start_date', sort: 'desc' },
+  popular: { orderBy: 'popularity', sort: 'asc' },
+  score: { orderBy: 'score', sort: 'desc' },
+};
+
+export function searchManga({
+  q = '',
+  genre = '',
+  minScore = '',
+  sortBy = 'recent',
+  page = 1,
+  limit = 24,
+} = {}) {
+  const ordering = orderConfig[sortBy] ?? orderConfig.recent;
+
   return jikanFetch('/manga', {
     q,
     genres: genre,
     min_score: minScore,
     page,
     limit,
-    order_by: 'popularity',
-    sort: 'asc',
+    order_by: ordering.orderBy,
+    sort: ordering.sort,
     sfw: true,
   });
 }

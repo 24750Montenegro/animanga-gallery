@@ -12,9 +12,16 @@ export const scoreOptions = [
   { value: '9', label: '9+' },
 ];
 
+export const sortOptions = [
+  { value: 'recent', label: 'Mas recientes' },
+  { value: 'popular', label: 'Mas populares' },
+  { value: 'score', label: 'Mejor calificadas' },
+];
+
 export const initialFilters = {
   q: '',
   type: 'anime',
   genre: '',
   minScore: '',
+  sortBy: 'recent',
 };

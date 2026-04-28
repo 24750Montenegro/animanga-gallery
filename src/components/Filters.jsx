@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { itemTypeOptions, scoreOptions } from '../data/filterOptions.js';
+import { itemTypeOptions, scoreOptions, sortOptions } from '../data/filterOptions.js';
 import '../styles/Filters.css';
 
 export default function Filters({ values, genres = [], onChange, onSubmit, onReset }) {
@@ -49,6 +49,19 @@ export default function Filters({ values, genres = [], onChange, onSubmit, onRes
       </div>
 
       <div className="filter-field">
+        <label htmlFor="f-sort">Orden</label>
+        <select
+          id="f-sort"
+          value={values.sortBy}
+          onChange={(event) => onChange('sortBy', event.target.value)}
+        >
+          {sortOptions.map((option) => (
+            <option key={option.value} value={option.value}>{option.label}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className="filter-field">
         <label htmlFor="f-score">Calificacion min.</label>
         <select
           id="f-score"
@@ -78,6 +91,7 @@ Filters.propTypes = {
     type: PropTypes.oneOf(['anime', 'manga']).isRequired,
     genre: PropTypes.string.isRequired,
     minScore: PropTypes.string.isRequired,
+    sortBy: PropTypes.string.isRequired,
   }).isRequired,
   genres: PropTypes.arrayOf(
     PropTypes.shape({

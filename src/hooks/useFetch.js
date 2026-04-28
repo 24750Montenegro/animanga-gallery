@@ -22,7 +22,7 @@ function reducer(state, action) {
   return state;
 }
 
-export function useFetch(fn, deps = []) {
+export function useFetch(fn, deps = [], options = {}) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -31,7 +31,10 @@ export function useFetch(fn, deps = []) {
     dispatch({ type: 'loading' });
     fn()
       .then((res) => {
-        if (!cancelled) dispatch({ type: 'success', payload: res });
+        if (!cancelled) {
+          if (options.onSuccess) options.onSuccess(res);
+          dispatch({ type: 'success', payload: res });
+        }
       })
       .catch((err) => {
         if (!cancelled) dispatch({ type: 'error', payload: err });

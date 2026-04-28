@@ -1,25 +1,37 @@
 import { jikanFetch } from './jikan.js';
 
-// Buscar animes con filtros
-export function searchAnime({ q = '', genre = '', minScore = '', page = 1, limit = 24 } = {}) {
+const orderConfig = {
+  recent: { orderBy: 'start_date', sort: 'desc' },
+  popular: { orderBy: 'popularity', sort: 'asc' },
+  score: { orderBy: 'score', sort: 'desc' },
+};
+
+export function searchAnime({
+  q = '',
+  genre = '',
+  minScore = '',
+  sortBy = 'recent',
+  page = 1,
+  limit = 24,
+} = {}) {
+  const ordering = orderConfig[sortBy] ?? orderConfig.recent;
+
   return jikanFetch('/anime', {
     q,
     genres: genre,
     min_score: minScore,
     page,
     limit,
-    order_by: 'popularity',
-    sort: 'asc',
+    order_by: ordering.orderBy,
+    sort: ordering.sort,
     sfw: true,
   });
 }
 
-// Detalle por id
 export function getAnimeById(id) {
   return jikanFetch(`/anime/${id}/full`);
 }
 
-// Aleatorio
 export function getRandomAnime() {
   return jikanFetch('/random/anime');
 }

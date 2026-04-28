@@ -18,3 +18,8 @@
   margin-top: 28px;
 }
 .pagination span { color: var(--c-text-dim); }
+
+.results-loading {
+  text-align: center;
+  margin-top: 12px;
+}
