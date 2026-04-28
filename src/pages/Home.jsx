@@ -9,7 +9,7 @@ import '../styles/Home.css';
 
 export default function Home() {
   const { data, loading, error } = useFetch(
-    () => searchAnime({ limit: 6, minScore: 8 }),
+    () => searchAnime({ limit: 5, minScore: 8 }),
     []
   );
   const featured = normalizeItems(data?.data ?? [], 'anime');
@@ -48,11 +48,17 @@ export default function Home() {
       <section className="section">
         <div className="section-head">
           <h2>Anime destacado</h2>
-          <Link to="/items" className="text-link">Ver mas</Link>
         </div>
         {loading && <Loader />}
         {error && <p className="error-box">No se pudo cargar el bloque destacado.</p>}
-        {!loading && !error && <Gallery items={featured} />}
+        {!loading && !error && (
+          <>
+            <Gallery items={featured} />
+            <div className="featured-more">
+              <Link to="/items" className="btn-link btn-primary">Ver mas</Link>
+            </div>
+          </>
+        )}
       </section>
     </main>
   );
