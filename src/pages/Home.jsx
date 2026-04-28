@@ -28,14 +28,20 @@ export default function Home() {
       </section>
 
       <section className="section">
-        <h2>Lo esencial</h2>
-        <div className="feature-grid">
-          {homeContent.features.map((feature) => (
-            <article className="feature" key={feature.title}>
-              <h3>{feature.title}</h3>
-              <p>{feature.text}</p>
-            </article>
-          ))}
+        <div className="source-panel">
+          <div className="source-copy">
+            <p className="section-kicker">{homeContent.apiCredit.eyebrow}</p>
+            <h2>{homeContent.apiCredit.title}</h2>
+            <p>{homeContent.apiCredit.text}</p>
+          </div>
+          <div className="highlight-list">
+            {homeContent.highlights.map((item) => (
+              <article className="highlight-item" key={item.value}>
+                <strong>{item.value}</strong>
+                <span>{item.label}</span>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

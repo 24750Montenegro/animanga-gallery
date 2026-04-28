@@ -5,20 +5,25 @@ export const navLinks = [
 ];
 
 export const homeContent = {
-  title: 'Galeria azul para explorar anime y manga',
-  text: 'Busca titulos desde Jikan, filtra por categoria y calificacion, y guarda tus favoritos en modo oscuro.',
-  features: [
+  title: 'AniMangaGT',
+  text: 'Explora anime y manga desde Jikan, filtra por categoria y calificacion, y guarda tus favoritos en una interfaz oscura y directa.',
+  apiCredit: {
+    eyebrow: 'Datos por Jikan API',
+    title: 'Informacion actualizada desde MyAnimeList',
+    text: 'La galeria consume Jikan API v4 para mostrar listados, generos, imagenes y detalles sin mantener datos hardcodeados dentro de los componentes.',
+  },
+  highlights: [
     {
-      title: 'API real',
-      text: 'Los listados y detalles vienen de Jikan API v4, sin datos de muestra dentro de los componentes.',
+      value: 'Anime y manga',
+      label: 'Busqueda por tipo de contenido',
     },
     {
-      title: 'Filtros utiles',
-      text: 'Combina busqueda, tipo de contenido, categoria y calificacion minima desde la galeria.',
+      value: 'Generos',
+      label: 'Categorias reales desde Jikan',
     },
     {
-      title: 'Favoritos locales',
-      text: 'Marca anime o manga y conserva la lista en el navegador con Context API.',
+      value: 'Favoritos',
+      label: 'Guardados en el navegador',
     },
   ],
 };

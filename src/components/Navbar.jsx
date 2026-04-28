@@ -9,7 +9,7 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-inner">
-        <Link to="/" className="brand">animanga</Link>
+        <Link to="/" className="brand">AniMangaGT</Link>
         <div className="nav-links">
           {navLinks.map((link) => (
             <Link key={link.to} to={link.to}>{link.label}</Link>
