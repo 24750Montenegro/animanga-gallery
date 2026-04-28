@@ -23,7 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-# Claude Code config local
+# Config local de herramientas
 .claude/
 
 # Env
