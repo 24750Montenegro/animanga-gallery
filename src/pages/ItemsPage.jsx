@@ -52,13 +52,13 @@ export default function ItemsPage() {
   const handleSubmit = () => {
     setVisibleItems([]);
     setPage(1);
-    setActiveFilters(filters);
+    setActiveFilters({ ...filters });
   };
 
   const handleReset = () => {
     setVisibleItems([]);
-    setFilters(initialFilters);
-    setActiveFilters(initialFilters);
+    setFilters({ ...initialFilters });
+    setActiveFilters({ ...initialFilters });
     setPage(1);
   };
 
