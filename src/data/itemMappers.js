@@ -26,7 +26,18 @@ export function normalizeItem(item, type) {
 }
 
 export function normalizeItems(items, type) {
-  return items.map((item) => normalizeItem(item, type));
+  const seen = new Set();
+
+  return items
+    .map((item) => normalizeItem(item, type))
+    .filter((item) => {
+      const normalizedTitle = item.title.toLowerCase().replace(/\s+/g, ' ').trim();
+      const key = `${item.type}-${normalizedTitle || item.id}`;
+
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
 }
 
 export function normalizeDetail(item, type) {

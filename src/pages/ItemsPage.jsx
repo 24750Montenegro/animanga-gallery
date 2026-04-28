@@ -35,8 +35,14 @@ export default function ItemsPage() {
         setVisibleItems((current) => {
           if (page === 1) return nextItems;
 
-          const existing = new Set(current.map((item) => `${item.type}-${item.id}`));
-          const freshItems = nextItems.filter((item) => !existing.has(`${item.type}-${item.id}`));
+          const existing = new Set(
+            current.map((item) => `${item.type}-${item.title.toLowerCase().trim()}`)
+          );
+          const freshItems = nextItems.filter((item) => {
+            const key = `${item.type}-${item.title.toLowerCase().trim()}`;
+            return !existing.has(key);
+          });
+
           return [...current, ...freshItems];
         });
       },
