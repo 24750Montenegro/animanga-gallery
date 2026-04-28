@@ -1,16 +1,71 @@
-# React + Vite
+# Animanga Gallery
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Web en React para explorar anime y manga usando la API publica de Jikan v4. Incluye galeria con filtros por categoria y calificacion, detalle por ID y favoritos locales con modo oscuro.
 
-Currently, two official plugins are available:
+## Tecnologias
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Vite + React
+- react-router-dom v6
+- Context API
+- CSS modular por archivo
+- Jikan API v4: https://docs.api.jikan.moe/
 
-## React Compiler
+## Rutas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- `/`: inicio con destacados desde Jikan.
+- `/items`: galeria con filtros de anime y manga.
+- `/items/:id`: detalle usando `useParams`; el tipo viaja en `?type=anime` o `?type=manga`.
+- `/favorites`: favoritos guardados en el navegador.
+- `*`: pagina 404.
 
-## Expanding the ESLint configuration
+## Instalacion
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev
+```
+
+El servidor de desarrollo se abre normalmente en `http://localhost:5173`.
+
+## Scripts
+
+```bash
+npm run dev
+npm run build
+npm run lint
+npm run preview
+```
+
+## Estructura
+
+- `src/api`: servicios de Jikan para anime, manga y generos.
+- `src/data`: textos, opciones de filtros y normalizadores.
+- `src/components`: componentes reutilizables.
+- `src/pages`: paginas conectadas a React Router.
+- `src/styles`: estilos CSS sin Tailwind ni Bootstrap.
+
+## Componentes reutilizables
+
+`Card`
+
+- `id`: ID de MyAnimeList/Jikan.
+- `type`: `anime` o `manga`.
+- `title`: titulo visible.
+- `image`: portada.
+- `score`: calificacion.
+- `year`: anio de salida.
+- `showType`: muestra el distintivo del tipo.
+
+`Gallery`
+
+- `items`: lista normalizada de tarjetas.
+- `showType`: activa el distintivo por tipo.
+- `emptyText`: mensaje cuando no hay resultados.
+
+`Filters`
+
+- `values`: estado actual de filtros.
+- `genres`: categorias recibidas desde Jikan.
+- `onChange`: actualiza un campo.
+- `onSubmit`: aplica los filtros.
+- `onReset`: limpia los filtros.
