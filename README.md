@@ -36,6 +36,10 @@ npm run lint
 npm run preview
 ```
 
+## Uso de Jikan
+
+Jikan limita el uso publico a 3 solicitudes por segundo y 60 por minuto. El cliente en `src/api/jikan.js` usa una cola corta, cache en memoria y reintentos para reducir errores `429 Too Many Requests` durante la navegacion y en modo desarrollo.
+
 ## Estructura
 
 - `src/api`: servicios de Jikan para anime, manga y generos.
