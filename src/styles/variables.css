@@ -1,0 +1,32 @@
+/* Paleta azul oscura */
+:root {
+  --c-bg: #020202;
+  --c-surface: #19191a;
+  --c-surface-2: #373739;
+  --c-accent: #60d4ea;
+  --c-accent-soft: #9ae5f3;
+  --c-text: #e6f6fa;
+  --c-text-dim: #9aa3a8;
+  --c-border: #2a2a2c;
+  --c-danger: #ff6b6b;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.45);
+  --transition: 180ms ease;
+
+  --max-width: 1200px;
+}
+
+[data-theme='light'] {
+  --c-bg: #f4fafd;
+  --c-surface: #ffffff;
+  --c-surface-2: #e1eef3;
+  --c-accent: #0094b3;
+  --c-accent-soft: #60d4ea;
+  --c-text: #19191a;
+  --c-text-dim: #4a5560;
+  --c-border: #cfdde3;
+  --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.08);
+}

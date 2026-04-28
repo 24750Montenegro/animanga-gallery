@@ -1,0 +1,11 @@
+.not-found {
+  text-align: center;
+  padding: 80px 24px;
+}
+.not-found h1 {
+  font-size: 6rem;
+  margin: 0;
+  color: var(--c-accent);
+  letter-spacing: 4px;
+}
+.not-found p { color: var(--c-text-dim); margin: 8px 0 24px; }
