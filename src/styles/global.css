@@ -107,3 +107,23 @@ img { display: block; max-width: 100%; }
   color: var(--c-accent);
   font-weight: 600;
 }
+
+@media (max-width: 640px) {
+  .container {
+    padding: 18px 14px;
+  }
+
+  .page-title {
+    font-size: 1.55rem;
+    margin-bottom: 10px;
+  }
+
+  .page-head {
+    margin-top: 10px;
+  }
+
+  .btn-link,
+  button {
+    min-height: 40px;
+  }
+}

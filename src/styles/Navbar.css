@@ -14,6 +14,7 @@
   padding: 14px 24px;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 24px;
 }
 
@@ -62,4 +63,31 @@
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2;
+}
+
+@media (max-width: 720px) {
+  .navbar-inner {
+    gap: 12px;
+    padding: 12px 14px;
+  }
+
+  .brand {
+    flex: 1;
+  }
+
+  .nav-actions {
+    margin-left: auto;
+  }
+
+  .nav-links {
+    order: 3;
+    flex-basis: 100%;
+    gap: 14px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+
+  .nav-links a {
+    white-space: nowrap;
+  }
 }

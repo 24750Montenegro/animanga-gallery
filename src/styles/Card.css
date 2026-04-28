@@ -89,3 +89,18 @@
   border-radius: var(--radius-sm);
   text-transform: uppercase;
 }
+
+@media (max-width: 640px) {
+  .card-body {
+    padding: 10px 11px 12px;
+  }
+
+  .card-title {
+    font-size: 0.92rem;
+  }
+
+  .fav-btn {
+    width: 32px;
+    height: 32px;
+  }
+}
