@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { navLinks } from '../data/appContent.js';
 import { useApp } from '../hooks/useApp.js';
+import ThemeToggle from './ThemeToggle.jsx';
 import '../styles/Navbar.css';
 
 export default function Navbar() {
@@ -16,9 +17,7 @@ export default function Navbar() {
           ))}
         </div>
         <div className="nav-actions">
-          <button onClick={toggleTheme} aria-label="Cambiar tema">
-            {theme === 'dark' ? 'Claro' : 'Oscuro'}
-          </button>
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
         </div>
       </div>
     </nav>
