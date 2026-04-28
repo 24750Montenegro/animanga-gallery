@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { itemTypeOptions, scoreOptions } from '../data/filterOptions.js';
 import '../styles/Filters.css';
 
 export default function Filters({ values, genres = [], onChange, onSubmit, onReset }) {
@@ -27,8 +28,9 @@ export default function Filters({ values, genres = [], onChange, onSubmit, onRes
           value={values.type}
           onChange={(event) => onChange('type', event.target.value)}
         >
-          <option value="anime">Anime</option>
-          <option value="manga">Manga</option>
+          {itemTypeOptions.map((option) => (
+            <option key={option.value} value={option.value}>{option.label}</option>
+          ))}
         </select>
       </div>
 
@@ -53,12 +55,9 @@ export default function Filters({ values, genres = [], onChange, onSubmit, onRes
           value={values.minScore}
           onChange={(event) => onChange('minScore', event.target.value)}
         >
-          <option value="">Cualquiera</option>
-          <option value="5">5+</option>
-          <option value="6">6+</option>
-          <option value="7">7+</option>
-          <option value="8">8+</option>
-          <option value="9">9+</option>
+          {scoreOptions.map((option) => (
+            <option key={option.label} value={option.value}>{option.label}</option>
+          ))}
         </select>
       </div>
 

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useApp } from '../context/AppContext.jsx';
+import { useApp } from '../hooks/useApp.js';
 import '../styles/Card.css';
 
 export default function Card({ id, type, title, image, score, year, showType = false }) {

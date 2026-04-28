@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useApp } from '../context/AppContext.jsx';
+import { navLinks } from '../data/appContent.js';
+import { useApp } from '../hooks/useApp.js';
 import '../styles/Navbar.css';
 
 export default function Navbar() {
@@ -10,9 +11,9 @@ export default function Navbar() {
       <div className="navbar-inner">
         <Link to="/" className="brand">animanga</Link>
         <div className="nav-links">
-          <Link to="/">Inicio</Link>
-          <Link to="/items">Galeria</Link>
-          <Link to="/favorites">Favoritos</Link>
+          {navLinks.map((link) => (
+            <Link key={link.to} to={link.to}>{link.label}</Link>
+          ))}
         </div>
         <div className="nav-actions">
           <button onClick={toggleTheme} aria-label="Cambiar tema">

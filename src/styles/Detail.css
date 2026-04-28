@@ -11,8 +11,21 @@
   overflow: hidden;
   border: 1px solid var(--c-border);
   background: var(--c-surface);
+  display: grid;
+  place-items: center;
+  color: var(--c-text-dim);
+  min-height: 360px;
 }
 .detail-cover img { width: 100%; aspect-ratio: 2/3; object-fit: cover; }
+
+.detail-kicker {
+  color: var(--c-accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
 
 .detail-title { font-size: 2rem; margin: 0 0 6px; }
 .detail-jp { color: var(--c-text-dim); margin: 0 0 16px; }

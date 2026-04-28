@@ -54,7 +54,34 @@ img { display: block; max-width: 100%; }
   margin: 0 0 16px;
 }
 
+.page-head {
+  margin: 16px 0 24px;
+}
+
+.page-copy {
+  margin: 0;
+  color: var(--c-text-dim);
+  max-width: 640px;
+}
+
 .muted { color: var(--c-text-dim); }
+
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+  color: var(--c-text);
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.btn-link:hover {
+  border-color: var(--c-accent);
+  color: var(--c-accent);
+}
 
 .btn-primary {
   background: var(--c-accent);
@@ -74,4 +101,9 @@ img { display: block; max-width: 100%; }
   color: var(--c-danger);
   padding: 12px 16px;
   border-radius: var(--radius-md);
+}
+
+.text-link {
+  color: var(--c-accent);
+  font-weight: 600;
 }

@@ -1,30 +1,47 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 
-// Hook de fetching con estado loading/error/data
+const initialState = {
+  data: null,
+  loading: true,
+  error: null,
+};
+
+function reducer(state, action) {
+  if (action.type === 'loading') {
+    return { ...state, loading: true, error: null };
+  }
+
+  if (action.type === 'success') {
+    return { data: action.payload, loading: false, error: null };
+  }
+
+  if (action.type === 'error') {
+    return { ...state, loading: false, error: action.payload };
+  }
+
+  return state;
+}
+
 export function useFetch(fn, deps = []) {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     let cancelled = false;
-    setLoading(true);
-    setError(null);
+
+    dispatch({ type: 'loading' });
     fn()
       .then((res) => {
-        if (!cancelled) setData(res);
+        if (!cancelled) dispatch({ type: 'success', payload: res });
       })
       .catch((err) => {
-        if (!cancelled) setError(err);
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
+        if (!cancelled) dispatch({ type: 'error', payload: err });
       });
+
     return () => {
       cancelled = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
-  return { data, loading, error };
+  return state;
 }
