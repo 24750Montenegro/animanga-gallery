@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Card from '../components/Card.jsx';
 import Gallery from '../components/Gallery.jsx';
 import Loader from '../components/Loader.jsx';
@@ -13,6 +13,9 @@ import '../styles/Home.css';
 export default function Home() {
   // Semillas simples para volver a pedir random sin desmontar la pagina.
   const [randomReloads, setRandomReloads] = useState({ anime: 0, manga: 0 });
+  const [isSurpriseLoading, setIsSurpriseLoading] = useState(false);
+  const navigate = useNavigate();
+
   const { data, loading, error } = useFetch(
     () => searchAnime({ limit: 5, minScore: 8 }),
     []
@@ -40,6 +43,21 @@ export default function Home() {
       ...current,
       [type]: current[type] + 1,
     }));
+  };
+
+  const handleSurprise = async () => {
+    try {
+      setIsSurpriseLoading(true);
+      const isAnime = Math.random() > 0.5;
+      const type = isAnime ? 'anime' : 'manga';
+      const response = isAnime ? await getRandomAnime() : await getRandomManga();
+      const id = response.data.mal_id;
+      navigate(`/items/${id}?type=${type}`);
+    } catch (err) {
+      console.error('Error fetching random item:', err);
+    } finally {
+      setIsSurpriseLoading(false);
+    }
   };
 
   return (
@@ -98,6 +116,15 @@ export default function Home() {
               {item && <Card {...item} showType />}
             </div>
           ))}
+        </div>
+        <div className="random-surprise-container">
+          <button 
+            onClick={handleSurprise} 
+            className="btn-primary surprise-btn" 
+            disabled={isSurpriseLoading}
+          >
+            {isSurpriseLoading ? 'Cargando...' : '¡Sorpréndeme con un anime o manga!'}
+          </button>
         </div>
       </section>
 

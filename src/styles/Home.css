@@ -80,6 +80,17 @@
   white-space: nowrap;
 }
 
+.random-surprise-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.surprise-btn {
+  font-size: 1.05rem;
+  padding: 12px 24px;
+}
+
 .source-panel {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
