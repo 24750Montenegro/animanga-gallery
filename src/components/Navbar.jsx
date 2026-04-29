@@ -10,7 +10,10 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-inner">
-        <Link to="/" className="brand">AniMangaGT</Link>
+        <Link to="/" className="brand" aria-label="Ir al inicio de AniMangaGT">
+          <img src="/favicon.svg" alt="" className="brand-mark" />
+          <span>AniMangaGT</span>
+        </Link>
         <div className="nav-links">
           {navLinks.map((link) => (
             <Link key={link.to} to={link.to}>{link.label}</Link>

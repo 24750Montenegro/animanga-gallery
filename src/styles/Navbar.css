@@ -19,10 +19,21 @@
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
   font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: 0.5px;
   color: var(--c-accent);
+}
+
+.brand-mark {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 0 1px var(--c-border);
 }
 
 .nav-links {
