@@ -26,6 +26,7 @@ function buildUrl(path, params) {
 }
 
 async function scheduleRequest(task) {
+  // Jikan limita la frecuencia, por eso las peticiones van en cola.
   const run = queue.then(async () => {
     await wait(REQUEST_DELAY);
     return task();
@@ -55,8 +56,15 @@ async function requestWithRetry(url, attempt = 0) {
   return res.json();
 }
 
-export async function jikanFetch(path, params = {}) {
+export async function jikanFetch(path, params = {}, options = {}) {
   const url = buildUrl(path, params);
+  const shouldUseCache = !options.skipCache;
+
+  // Los endpoints random necesitan saltar cache para traer otro resultado.
+  if (!shouldUseCache) {
+    return scheduleRequest(() => requestWithRetry(url));
+  }
+
   const cached = cache.get(url);
 
   if (cached && Date.now() - cached.createdAt < CACHE_TTL) {

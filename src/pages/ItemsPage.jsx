@@ -16,6 +16,7 @@ function hasFilterChanges(current, applied) {
 }
 
 export default function ItemsPage() {
+  // Los filtros editados no disparan busqueda hasta presionar Aplicar.
   const [filters, setFilters] = useState(initialFilters);
   const [activeFilters, setActiveFilters] = useState(initialFilters);
   const [page, setPage] = useState(1);

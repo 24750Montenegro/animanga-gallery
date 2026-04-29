@@ -1,6 +1,6 @@
 import { jikanFetch } from './jikan.js';
 
-// Géneros para filtros
+// Generos usados por los filtros.
 export function getAnimeGenres() {
   return jikanFetch('/genres/anime');
 }

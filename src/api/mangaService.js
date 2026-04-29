@@ -33,5 +33,6 @@ export function getMangaById(id) {
 }
 
 export function getRandomManga() {
-  return jikanFetch('/random/manga');
+  // Sin cache para que cada clic pueda mostrar un manga distinto.
+  return jikanFetch('/random/manga', { sfw: true }, { skipCache: true });
 }

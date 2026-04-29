@@ -6,6 +6,7 @@ const STORAGE_KEY = 'animanga:state';
 
 function loadState() {
   try {
+    // Evita que un dato corrupto en localStorage rompa la app.
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? JSON.parse(raw) : null;
   } catch {
@@ -19,6 +20,7 @@ export default function AppProvider({ children }) {
   const [favorites, setFavorites] = useState(persisted?.favorites ?? []);
 
   useEffect(() => {
+    // Solo se persiste estado global compartido.
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ theme, favorites }));
   }, [theme, favorites]);
 

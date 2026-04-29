@@ -1,18 +1,46 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Card from '../components/Card.jsx';
 import Gallery from '../components/Gallery.jsx';
 import Loader from '../components/Loader.jsx';
-import { searchAnime } from '../api/animeService.js';
+import { getRandomAnime, searchAnime } from '../api/animeService.js';
+import { getRandomManga } from '../api/mangaService.js';
 import { homeContent } from '../data/appContent.js';
-import { normalizeItems } from '../data/itemMappers.js';
+import { normalizeItem, normalizeItems } from '../data/itemMappers.js';
 import { useFetch } from '../hooks/useFetch.js';
 import '../styles/Home.css';
 
 export default function Home() {
+  // Semillas simples para volver a pedir random sin desmontar la pagina.
+  const [randomReloads, setRandomReloads] = useState({ anime: 0, manga: 0 });
   const { data, loading, error } = useFetch(
     () => searchAnime({ limit: 5, minScore: 8 }),
     []
   );
+  const randomAnime = useFetch(getRandomAnime, [randomReloads.anime]);
+  const randomManga = useFetch(getRandomManga, [randomReloads.manga]);
   const featured = normalizeItems(data?.data ?? [], 'anime');
+  const randomPicks = [
+    {
+      type: 'anime',
+      title: 'Anime aleatorio',
+      state: randomAnime,
+      item: randomAnime.data?.data ? normalizeItem(randomAnime.data.data, 'anime') : null,
+    },
+    {
+      type: 'manga',
+      title: 'Manga aleatorio',
+      state: randomManga,
+      item: randomManga.data?.data ? normalizeItem(randomManga.data.data, 'manga') : null,
+    },
+  ];
+
+  const refreshRandom = (type) => {
+    setRandomReloads((current) => ({
+      ...current,
+      [type]: current[type] + 1,
+    }));
+  };
 
   return (
     <main className="container">
@@ -42,6 +70,34 @@ export default function Home() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section-head">
+          <div>
+            <p className="section-kicker">Descubre algo nuevo</p>
+            <h2>Seleccion aleatoria</h2>
+          </div>
+        </div>
+        <div className="random-grid">
+          {randomPicks.map(({ type, title, state, item }) => (
+            <div className="random-column" key={type}>
+              <div className="random-title-row">
+                <h3>{title}</h3>
+                <button
+                  type="button"
+                  onClick={() => refreshRandom(type)}
+                  disabled={state.loading}
+                >
+                  {state.loading ? 'Cargando' : 'Cambiar'}
+                </button>
+              </div>
+              {state.loading && !item && <Loader />}
+              {state.error && <p className="error-box">No se pudo cargar este recomendado.</p>}
+              {item && <Card {...item} showType />}
+            </div>
+          ))}
         </div>
       </section>
 

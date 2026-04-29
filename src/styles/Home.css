@@ -51,6 +51,35 @@
   margin-top: 24px;
 }
 
+.random-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 240px));
+  gap: 22px;
+  align-items: start;
+}
+
+.random-column {
+  min-width: 0;
+}
+
+.random-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.random-title-row h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.random-title-row button {
+  padding-inline: 12px;
+  white-space: nowrap;
+}
+
 .source-panel {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
@@ -113,5 +142,9 @@
 
   .source-panel {
     grid-template-columns: 1fr;
+  }
+
+  .random-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 }

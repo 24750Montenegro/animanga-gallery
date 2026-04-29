@@ -31,6 +31,7 @@ export function useFetch(fn, deps = [], options = {}) {
     dispatch({ type: 'loading' });
     fn()
       .then((res) => {
+        // Ignora respuestas tardias despues de desmontar el componente.
         if (!cancelled) {
           if (options.onSuccess) options.onSuccess(res);
           dispatch({ type: 'success', payload: res });

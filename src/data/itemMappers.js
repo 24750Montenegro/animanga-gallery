@@ -31,6 +31,7 @@ export function normalizeItems(items, type) {
   return items
     .map((item) => normalizeItem(item, type))
     .filter((item) => {
+      // Jikan puede devolver entradas repetidas con titulos equivalentes.
       const normalizedTitle = item.title.toLowerCase().replace(/\s+/g, ' ').trim();
       const key = `${item.type}-${normalizedTitle || item.id}`;
 

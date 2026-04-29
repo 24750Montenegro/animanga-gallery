@@ -33,5 +33,6 @@ export function getAnimeById(id) {
 }
 
 export function getRandomAnime() {
-  return jikanFetch('/random/anime');
+  // Sin cache para que cada clic pueda mostrar un anime distinto.
+  return jikanFetch('/random/anime', { sfw: true }, { skipCache: true });
 }
