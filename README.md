@@ -2,6 +2,10 @@
 
 Web en React para explorar anime y manga usando la API publica de Jikan v4. Incluye galeria con filtros por categoria y calificacion, detalle por ID y favoritos locales con modo oscuro.
 
+## Nivel objetivo
+
+### Senior
+
 ## Tecnologias
 
 - Vite + React
