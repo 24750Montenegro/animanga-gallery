@@ -9,9 +9,12 @@ function getImage(item) {
 }
 
 function getYear(item, type) {
-  if (type === 'anime') return item.year ?? null;
-  const date = item.published?.from;
-  return date ? new Date(date).getFullYear() : null;
+  const date = type === 'anime' ? item.aired?.from : item.published?.from;
+  const fallbackYear = date ? new Date(date).getFullYear() : null;
+  const safeFallbackYear = Number.isFinite(fallbackYear) ? fallbackYear : null;
+
+  if (type === 'anime') return item.year ?? safeFallbackYear;
+  return safeFallbackYear;
 }
 
 export function normalizeItem(item, type) {

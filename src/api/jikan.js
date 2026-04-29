@@ -7,6 +7,10 @@ const cache = new Map();
 const pending = new Map();
 let queue = Promise.resolve();
 
+function isRetriableStatus(status) {
+  return status === 408 || status === 429 || status >= 500;
+}
+
 function wait(ms) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
@@ -37,11 +41,24 @@ async function scheduleRequest(task) {
 }
 
 async function requestWithRetry(url, attempt = 0) {
-  const res = await fetch(url);
+  let res;
 
-  if (res.status === 429 && attempt < RETRIES) {
+  try {
+    res = await fetch(url);
+  } catch (error) {
+    if (attempt < RETRIES) {
+      await wait(REQUEST_DELAY * (attempt + 1));
+      return requestWithRetry(url, attempt + 1);
+    }
+
+    throw error;
+  }
+
+  if (isRetriableStatus(res.status) && attempt < RETRIES) {
     const retryAfter = Number(res.headers.get('Retry-After'));
-    const delay = Number.isFinite(retryAfter) ? retryAfter * 1000 : REQUEST_DELAY * 3;
+    const delay = Number.isFinite(retryAfter) && retryAfter > 0
+      ? retryAfter * 1000
+      : REQUEST_DELAY * (attempt + 3);
     await wait(delay);
     return requestWithRetry(url, attempt + 1);
   }
@@ -60,24 +77,24 @@ export async function jikanFetch(path, params = {}, options = {}) {
   const url = buildUrl(path, params);
   const shouldUseCache = !options.skipCache;
 
-  // Los endpoints random necesitan saltar cache para traer otro resultado.
-  if (!shouldUseCache) {
-    return scheduleRequest(() => requestWithRetry(url));
-  }
+  if (shouldUseCache) {
+    const cached = cache.get(url);
 
-  const cached = cache.get(url);
-
-  if (cached && Date.now() - cached.createdAt < CACHE_TTL) {
-    return cached.data;
+    if (cached && Date.now() - cached.createdAt < CACHE_TTL) {
+      return cached.data;
+    }
   }
 
   if (pending.has(url)) {
     return pending.get(url);
   }
 
+  // Evita duplicados simultaneos, incluso cuando se salta el cache.
   const request = scheduleRequest(() => requestWithRetry(url))
     .then((data) => {
-      cache.set(url, { data, createdAt: Date.now() });
+      if (shouldUseCache) {
+        cache.set(url, { data, createdAt: Date.now() });
+      }
       return data;
     })
     .finally(() => {
