@@ -73,6 +73,7 @@ export default function Home() {
         </div>
       </section>
 
+{/*  CREDITOS DE LA API
       <section className="section">
         <div className="source-panel">
           <div className="source-copy">
@@ -89,7 +90,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section className="section">
         <div className="section-head">

@@ -7,11 +7,11 @@ export const navLinks = [
 export const homeContent = {
   title: 'AniMangaGT',
   text: 'Explora anime y manga desde Jikan, filtra por categoria y calificacion, y guarda tus favoritos en una interfaz oscura y directa.',
-  apiCredit: {
+ /*  apiCredit: {
     eyebrow: 'Datos por Jikan API',
     title: 'Informacion actualizada desde MyAnimeList',
-    text: 'La galeria consume Jikan API v4 para mostrar listados, generos, imagenes y detalles sin mantener datos hardcodeados dentro de los componentes.',
-  },
+    text: 'La galeria consume Jikan API v4 para mostrar listados, generos, imagenes y detalles.',
+  }, */
   highlights: [
     {
       value: 'Anime y manga',
