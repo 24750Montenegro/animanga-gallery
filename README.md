@@ -6,6 +6,10 @@ Web en React para explorar anime y manga usando la API publica de Jikan v4. Incl
 
 ### Senior
 
+## DEPLOY en Render
+
+### https://animanga-gt.onrender.com
+
 ## Tecnologias
 
 - Vite + React
